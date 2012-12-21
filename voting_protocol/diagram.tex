@@ -1,0 +1,210 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+
+\usepackage{ragged2e}
+\newcommand\jtem{\item\justifying}
+
+\begin{document}
+	\begin{tikzpicture}
+
+		\node at (-1,.5){};
+		\foreach \x in {0,1,...,25}{
+			\coordinate (ballot\x) at (0,-\x);
+			\coordinate (client\x) at (10,-\x);
+			\coordinate (voter\x) at (20,-\x);
+			\coordinate (ballotEND) at (0,-\x);
+			\coordinate (clientEND) at (10,-\x);
+			\coordinate (voterEND) at (20,-\x);
+			\node at (21,-\x){};
+		}
+
+		\draw[color=red!16] (ballot0) edge (ballotEND);
+		\draw[color=green!16] (client0) edge (clientEND);
+		\draw[color=blue!16] (voter0) edge (voterEND);
+
+		\draw (ballot0) node[fill=red!16](ballot) {\textsc{ballot}};
+		\draw (client0) node[fill=green!16](client) {\textsc{client}};
+		\draw (voter0) node[fill=blue!16](voter) {\textsc{voter}};
+
+
+		\draw (client1) edge node[sloped,above]
+		{$\displaystyle
+			\left(
+				\#V,\#O
+			\right)
+				\in
+				\mathbb{N}^2
+		$} (ballot2);
+
+		\draw (ballot3) edge node[sloped,above]
+		{$\displaystyle
+			\left(
+				p,g
+			\right)
+				\in
+				\mathbb{P} \times \mathbb{Z}_p
+		$} (client4);
+
+		\draw (client5) node[anchor=west,align=left]
+		{
+			$
+				k \in \mathbb{Z}_p
+			$
+			\\
+			$\displaystyle
+				\left\{
+					\left(t_v,y_v\right)|
+					\gcd\left(y_v,p-1\right)=1
+				\right\}
+					_{v \in V}
+					\subset
+					\mathbb{Z}_p \times \mathbb{Z}_{p-1}
+			$
+		};
+
+		\draw (client6) edge node[sloped,above] 
+		{$\displaystyle
+			\left\{
+				g^{t_v}
+			\right\}
+				_{v \in V}
+				\subset
+				\mathbb{Z}_p
+		$} (ballot7);
+
+		\draw (client7) edge node[sloped,above]
+		{$\displaystyle
+			\left\{
+				\left(
+					g^{t_v},
+					P_{o}g^{kt_v},
+					g^{y_v},
+					\left(P_{o}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}
+				\right)
+			\right\}
+				_{o \in O}
+				\subset
+				\mathbb{Z}_p^3 \times \mathbb{Z}_{p-1}
+		$} (voter8);
+
+		\draw (voter9) node[anchor=east]
+		{$\displaystyle
+			c_v \in O
+		$};
+
+		\draw (voter10) edge node[sloped,above]
+		{$\displaystyle
+			\left(
+				g^{t_v},
+				P_{c_v}g^{kt_v},
+				g^{y_v},
+				\left(P_{c_v}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}
+			\right)
+				\in
+				\mathbb{Z}_p^3 \times \mathbb{Z}_{p-1}
+		$} (ballot11);
+
+		\draw (ballot12) node[anchor=west]
+		{$\displaystyle
+			\left\{g^{t_v}\right\}
+			\times
+			\mathbb{Z}_p
+			\cap
+			\Gamma
+			\stackrel{?}{=}
+			\emptyset
+		$};
+
+		\draw (ballot13) node[anchor=west]
+		{$\displaystyle
+			g^{\left({P_{c_v}g^{kt_v}}\right)}
+			\stackrel{?}{\equiv}_p
+			{\left(g^{t_v}\right)}^
+			{\left(g^{y_v}\right)}
+			{\left(g^{y_v}\right)}^
+			{\left(\left(P_{c_v}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}\right)}
+		$};
+
+		\draw (ballot14) node[anchor=west]
+		{$\displaystyle
+			\Gamma
+			\gets
+			\Gamma
+			\cup
+			\left(g^{t_v},P_{c_v}g^{kt_v}\right)
+		$};
+
+		\draw (client15) edge node[sloped,above]
+		{
+			\texttt{koniec głosowania}
+		} (ballot16);
+
+		\draw (ballot17) edge node[sloped,above]
+		{$\displaystyle
+			\left(
+				\prod_{{v}\in{V'}}{g^{t_v}}, 
+				\prod_{{v}\in{V'}}{P_{c_v}g^{kt_v}}
+			\right)
+				\in
+				\mathbb{Z}_p^2
+		$} (client18);
+
+		\draw (client19) node[anchor=east]
+		{$\displaystyle
+			\prod_{{v}\in{V'}}{P_{c_v}}
+			\equiv_p
+			\left(
+				\prod_{{v}\in{V'}}g^{t_v}
+			\right)
+			^{-k}
+			\left(
+				\prod_{{v}\in{V'}}{P_{c_v}g^{kt_v}}
+			\right)
+		$};
+
+		\draw (client21) node[anchor=east]
+		{$\displaystyle
+			\operatorname{factor}
+			\left(
+				\prod_{{v}\in{V'}}{P_{c_v}}
+			\right)
+		$};
+
+
+		\draw (10.5,-11) node[anchor=north west,text width=250,fill=cyan!8]
+		{\fontsize{8pt}{3pt}\selectfont
+			\begin{enumerate}[leftmargin=2em,rightmargin=1em]
+				\jtem \textsc{client} wysyła do \textsc{ballot}'a dwie liczby. $\#V$ określa ilość osób jaka jest dopuszczona do głosowania, natomiast $\#O$ mówi ile jest możliwości wyboru.
+				\jtem \textsc{ballot} odsyła do \textsc{client}'a liczbę pierwszą $p$ określającą grupę $\mathbb{Z}_p$ oraz jej generator $g$.
+				\jtem \textsc{client} losuje klucz głosowania $k$ oraz parę kluczy tymczasowych $(t_v,y_v)$ dla każdego głosującego $v$.
+				\jtem \textsc{client} przesyła do \textsc{ballot}'a wszystkie klucze prywatne $g^t$.
+				\jtem \textsc{client} dystrybuuje wszystkim \textsc{voter}'om \emph{karty to głosowania} składające się z $\#O$ czwórek wyliczanych indywidualnie dla każdego z nich. Pierwszym elementem każdej czwórki danego \textsc{voter}'a $v$ jest odpowiadający mu klucz publiczny $g^{t_v}$. Kolejnym elementem jest zaszyfrowana przy pomocy $(k,t_v)$ liczba pierwsza $P_o$ odpowiadająca jednemu z możliwych wyborów $o \in O$. Trzeci element krotki to $g^{y_v}$. Czwarty natomiast jest wynikiem podpisania przy pomocy $(t_v,y_v)$ drugiego elementu tejże czwórki.
+				\jtem \textsc{voter} wybiera $c_v$ będące jednym z elementów $O$.
+				\jtem \textsc{voter} wysyła do \textsc{ballot}'a czwórkę odpowiadającą swojemu wyborowi $c_v$.
+				\jtem \textsc{ballot} sprawdza czy nie oddano już głosu z tej karty do głosowania $g^{t_v}$.
+				\jtem \textsc{ballot} sprawdza poprawność podpisu złożonego pod głosem.
+				\jtem \textsc{ballot} księguje oddanie głosu.
+				\jtem \textsc{client} wysyła do \textsc{ballot}'a informacje o końcu głosowania.
+				\jtem \textsc{ballot} odsyła do \textsc{client}'a parę iloczynów kluczy publicznych $g^{t_v}$ oraz zaszyfrowanych komunikatów $P_{c_v}g^{kt_v}$. $v$ w tym przypadku przebiega po zbiorze $V'$ będącym podzbiorem $V$ zawierającym tylko tych \textsc{voter}'ów, którzy oddali poprawne głosy.
+				\jtem \textsc{client} odszyfrowuje iloczyn $P_{c_v}$ przy pomocy klucza $k$
+				\jtem \textsc{client} dokonuje faktoryzacji $P_{c_v}$ otrzymując potęgi kolejnych liczb pierwszych, które odpowiadają oddanym głosom.
+			\end{enumerate}
+		};
+		
+		\draw (10.5,-1) node[anchor=north west,align=right,text width=230,fill=yellow!16,inner sep=10]
+		{
+			{\fontsize{11}{1}\selectfont\hfill Piotr Majkrzak, Szymon Nosal\\}
+			\vspace{8pt}
+			{\fontsize{23}{1}\fontshape{sl}\selectfont\hfill głosowanie internetowe\\}
+			{\fontsize{21}{1}\fontshape{sl}\selectfont\color{black!64}\hfill szkic protokołu\\}
+			{\fontsize{12}{1}\fontshape{sl}\selectfont\color{black!64}\hfill Kraków, \today}
+		};
+
+	\end{tikzpicture}
+\end{document}
