@@ -1,0 +1,90 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+
+\usepackage{listings}
+	\lstset{basicstyle=\ttfamily}
+	\lstset{escapeinside=\%\%}
+	\lstset{tabsize=4}
+
+\usepackage{tikz}
+	\usetikzlibrary{matrix}
+	\tikzstyle{packet}=[
+			shape = rectangle,
+			fill = cyan!32,
+			text width = 128pt,
+			inner xsep = 8pt,
+			inner ysep = 8pt,
+		]
+
+\begin{document}
+	\begin{tikzpicture}
+
+		\matrix [column sep = 64pt, row sep = 16pt]
+		{
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: prepare_vote
+				data:
+					- %$\#V$%
+					- %$\#O$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: vote_ready
+				vuid: %$\gamma$%
+				data:
+					- %$p$%
+					- %$q$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: start_vote
+				vuid: %$\gamma$%
+				data: %$\left\{g^{t_v}\right\}_{v \in V}$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: take_my_vote
+				vuid: %$\gamma$%
+				data:
+					- %$g^{t_v}$%
+					- %$P_{o}g^{kt_v}$%
+					- %$g^{y_v}$%
+					- %$\left(P_{o}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: stop_vote
+				vuid: %$\gamma$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: vote_stopped
+				vuid: %$\gamma$%
+				data:
+					- %$\prod_{{v}\in{V'}}{g^{t_v}}$%
+					- %$\prod_{{v}\in{V'}}{P_{c_v}g^{kt_v}}$%
+				...
+			\end{lstlisting}};
+			\\
+		};
+
+	\end{tikzpicture}
+\end{document}
