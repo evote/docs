@@ -12,7 +12,7 @@
 	\tikzstyle{packet}=[
 			shape = rectangle,
 			fill = cyan!32,
-			text width = 128pt,
+			text width = 256pt,
 			inner xsep = 8pt,
 			inner ysep = 8pt,
 		]
@@ -81,6 +81,32 @@
 				data:
 					- %$\prod_{{v}\in{V'}}{g^{t_v}}$%
 					- %$\prod_{{v}\in{V'}}{P_{c_v}g^{kt_v}}$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=blue!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: generate_votes
+				data:
+					- %$\#V$%
+					- %$\#O$%
+					- %$p$%
+					- %$q$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=blue!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: votes_generated
+				data:
+					- # %$ v \in V $%
+						- # %$ o \in O $%
+							- %$g^{t_v}$%
+							- %$P_{o}g^{kt_v}$%
+							- %$g^{y_v}$%
+							- %$\left(P_{o}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}$%
 				...
 			\end{lstlisting}};
 			\\
