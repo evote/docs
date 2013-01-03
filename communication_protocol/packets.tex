@@ -25,7 +25,7 @@
 			\node[packet]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: prepare_vote
+				type: prepare_voting
 				data:
 					- %$\#V$%
 					- %$\#O$%
@@ -35,7 +35,7 @@
 			\node[packet]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: vote_ready
+				type: voting_ready
 				vuid: %$\gamma$%
 				data:
 					- %$p$%
@@ -46,7 +46,7 @@
 			\node[packet]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: start_vote
+				type: start_voting
 				vuid: %$\gamma$%
 				data: %$\left\{g^{t_v}\right\}_{v \in V}$%
 				...
@@ -68,7 +68,7 @@
 			\node[packet]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: stop_vote
+				type: stop_voting
 				vuid: %$\gamma$%
 				...
 			\end{lstlisting}};
@@ -76,7 +76,7 @@
 			\node[packet]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: vote_stopped
+				type: voting_stopped
 				vuid: %$\gamma$%
 				data:
 					- %$\prod_{{v}\in{V'}}{g^{t_v}}$%
