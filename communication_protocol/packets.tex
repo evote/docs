@@ -11,7 +11,6 @@
 	\usetikzlibrary{matrix}
 	\tikzstyle{packet}=[
 			shape = rectangle,
-			fill = cyan!32,
 			text width = 256pt,
 			inner xsep = 8pt,
 			inner ysep = 8pt,
@@ -22,7 +21,7 @@
 
 		\matrix [column sep = 64pt, row sep = 16pt]
 		{
-			\node[packet]{
+			\node[packet,fill=cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: prepare_voting
@@ -32,10 +31,10 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet]{
+			\node[packet,fill=yellow!32!cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
-				type: voting_ready
+				type: voting_prepared
 				vuid: %$\gamma$%
 				data:
 					- %$p$%
@@ -43,7 +42,7 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet]{
+			\node[packet,fill=cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: start_voting
@@ -52,7 +51,15 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet]{
+			\node[packet,fill=yellow!32!cyan!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: voting_started
+				vuid: %$\gamma$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: take_my_vote
@@ -65,7 +72,15 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet]{
+			\node[packet,fill=yellow!32!cyan!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: vote_taken
+				vuid: %$\gamma$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: stop_voting
@@ -73,7 +88,7 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet]{
+			\node[packet,fill=yellow!32!cyan!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: voting_stopped
@@ -96,7 +111,7 @@
 				...
 			\end{lstlisting}};
 			\\
-			\node[packet,fill=blue!32]{
+			\node[packet,fill=green!32!blue!32]{
 			\begin{lstlisting}[gobble=16]
 				---
 				type: votes_generated
@@ -111,6 +126,27 @@
 								- %$P_{o}g^{kt_v}$%
 								- %$g^{y_v}$%
 								- %$\left(P_{o}g^{kt_v}-t_vg^{y_v}\right)y_v^{-1}$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=blue!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: count_votes
+				data:
+					- %$\#O$%
+					- %$p$%
+					- %$k$%
+					- %$\prod_{{v}\in{V'}}{g^{t_v}}$%
+					- %$\prod_{{v}\in{V'}}{P_{c_v}g^{kt_v}}$%
+				...
+			\end{lstlisting}};
+			\\
+			\node[packet,fill=green!32!blue!32]{
+			\begin{lstlisting}[gobble=16]
+				---
+				type: votes_counted
+				data: %$\left\{\#o\right\}_{o \in O}$%
 				...
 			\end{lstlisting}};
 			\\
